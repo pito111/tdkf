@@ -37,6 +37,7 @@ void setup() {
 // declare array for registering key statuses
 boolean keys[buttonColumnsCount][buttonRowsCount][2];
 // keyboard map. Be carefull with correct number of rows and columns.
+// transposed for better readability
 int keymap[buttonRowsCount][buttonColumnsCount] = {
   { KEY_Q, KEY_W, KEY_E, KEY_R, KEY_T, KEY_Y, KEY_U, KEY_I, KEY_O, KEY_P, KEY_LEFT_BRACE, KEY_RIGHT_BRACE, 0, 0},
   { KEY_A, KEY_S, KEY_D, KEY_F, KEY_G, KEY_H, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON, KEY_QUOTE, KEY_BACKSLASH, 0, 0},
