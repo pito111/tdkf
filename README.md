@@ -25,6 +25,9 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
 * Arduino IDE 1.8.10
 * Teensyduino 1.49-beta4
 
+## Notes
+* 6-key rollower is limitation of teensyduino usb keyboard library. If this will change also this limit will change.
+
 [1]: https://www.pjrc.com/teensy/
 [2]: https://www.pjrc.com/teensy/teensyduino.html
 [3]: https://www.arduino.cc/en/Main/Software
