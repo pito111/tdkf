@@ -10,7 +10,8 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
 * set up your own matrix and pinout
   * `buttonColumns[]`
   * `buttonRows[]`
-* `keymap[][]` - keyboard layout in respect to matrix
+* `keymap[][]` - keyboard layout in respect to matrix.
+  * for details see [documentation][4]
 * `pinDelay` - time (in milisecconds) to wait for pin level change
   * 1ms works with Teensy 4.0 and microswitches
   * try to increase this slightly if you experience key registration artifacts
@@ -21,9 +22,10 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
 
 ## Successfully Tested With
 * Teensy 4.0
-* Arduino 1.8.10
+* Arduino IDE 1.8.10
 * Teensyduino 1.49-beta4
 
 [1]: https://www.pjrc.com/teensy/
 [2]: https://www.pjrc.com/teensy/teensyduino.html
 [3]: https://www.arduino.cc/en/Main/Software
+[4]: https://www.pjrc.com/teensy/td_keyboard.html
