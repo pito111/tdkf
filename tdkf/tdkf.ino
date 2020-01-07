@@ -101,6 +101,7 @@ void loop() {
       // if key was just pressed
       if( keys[i][j][0] and ! keys[i][j][1] ) {
         Keyboard.press(keymap[j][i]);
+        // set LED to "on" level if key is pressed
         analogWrite(led, ledOn);
       }
       // if key was just released
