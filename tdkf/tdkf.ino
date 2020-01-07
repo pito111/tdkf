@@ -8,9 +8,9 @@ const byte ledOn = 100;
 const int pinDelay = 1;
 
 // keyboard row list
-const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 17 };
 // keyboard column list
-const byte buttonRows[] = { 21, 22, 23 };
+const byte buttonRows[] = { 21, 22, 23, 16, 19 };
 // number of columns
 const byte buttonColumnsCount = sizeof(buttonColumns) / sizeof(byte);
 // number of rows
@@ -37,10 +37,13 @@ void setup() {
 // declare array for registering key statuses
 boolean keys[buttonColumnsCount][buttonRowsCount][2];
 // keyboard map. Be carefull with correct number of rows and columns.
+// transposed for better readability
 int keymap[buttonRowsCount][buttonColumnsCount] = {
-  {KEY_Q, KEY_W, KEY_E, KEY_R, KEY_T, KEY_Y, KEY_U, KEY_I, KEY_O, KEY_P, KEY_LEFT_BRACE, KEY_RIGHT_BRACE},
-  {KEY_A, KEY_S, KEY_D, KEY_F, KEY_G, KEY_H, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON, KEY_QUOTE, KEY_BACKSLASH},
-  {MODIFIERKEY_SHIFT, KEY_Z, KEY_X, KEY_C, KEY_V, KEY_B, KEY_N, KEY_M, KEY_COMMA, KEY_PERIOD, KEY_SLASH, KEY_SPACE}
+  { KEY_Q, KEY_W, KEY_E, KEY_R, KEY_T, KEY_Y, KEY_U, KEY_I, KEY_O, KEY_P, KEY_LEFT_BRACE, KEY_RIGHT_BRACE, 0, 0},
+  { KEY_A, KEY_S, KEY_D, KEY_F, KEY_G, KEY_H, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON, KEY_QUOTE, KEY_BACKSLASH, 0, 0},
+  { MODIFIERKEY_SHIFT, KEY_Z, KEY_X, KEY_C, KEY_V, KEY_B, KEY_N, KEY_M, KEY_COMMA, KEY_PERIOD, KEY_SLASH, KEY_SPACE, 0, 0},
+  { MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL },
+  { KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER }
 };
 
 // variable to register if any key is pressed
@@ -98,7 +101,7 @@ void loop() {
       // if key was just pressed
       if( keys[i][j][0] and ! keys[i][j][1] ) {
         Keyboard.press(keymap[j][i]);
-        // set LED to "on" level
+        // set LED to "on" level if key is pressed
         analogWrite(led, ledOn);
       }
       // if key was just released

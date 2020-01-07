@@ -25,7 +25,11 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
 * Arduino IDE 1.8.10
 * Teensyduino 1.49-beta4
 
+## Notes
+* 6-key rollower is limitation of [USB Keyboard BOOT Protocol][5]. Will try to implement bigger rollower limit via Raw HID.
+
 [1]: https://www.pjrc.com/teensy/
 [2]: https://www.pjrc.com/teensy/teensyduino.html
 [3]: https://www.arduino.cc/en/Main/Software
 [4]: https://www.pjrc.com/teensy/td_keyboard.html
+[5]: http://tesorotec.com/support/understanding-n-key-rollover-and-6-key-rollover/
