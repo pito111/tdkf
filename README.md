@@ -12,8 +12,8 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
   * `buttonRows[]`
 * `keymap[][]` - keyboard layout in respect to matrix.
   * for details see [documentation][4]
-* `pinDelay` - time (in milisecconds) to wait for pin level change
-  * 1ms works with Teensy 4.0 and microswitches
+* `pinDelay` - time (in microsecconds) to wait for pin level change
+  * 10ms works with Teensy 4.0 and microswitches
   * try to increase this slightly if you experience key registration artifacts
 * indicator LED
   * `led` - pin for LED controll to which indicator LED is connected
@@ -26,7 +26,7 @@ Simple functioning 6-key rollower matrix keyboard firmware for [Teensy][1] imple
 * Teensyduino 1.49-beta4
 
 ## Notes
-* 6-key rollower is limitation of [USB Keyboard BOOT Protocol][5]. Will try to implement bigger rollower limit via Raw HID.
+* 6-key rollower is limitation of [USB Keyboard BOOT Protocol][5]. Bigger rollower limit could be implemented via Raw HID.
 
 [1]: https://www.pjrc.com/teensy/
 [2]: https://www.pjrc.com/teensy/teensyduino.html

@@ -4,8 +4,8 @@ const byte led = 13;
 const byte ledBase = 20;
 // "on" brightness level of LED
 const byte ledOn = 100;
-// delay after pin level change (1 works for Teensy 4.0)
-const int pinDelay = 1;
+// delay after pin level change in microsecconds
+const int pinDelay = 10;
 
 // keyboard row list
 const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 17 };
@@ -73,22 +73,22 @@ void loop() {
     if(digitalRead(buttonColumns[i]) == LOW) {
       // set all rows to HIGH
       for (int j = 0; j < buttonRowsCount; j++) digitalWrite(buttonRows[j], HIGH);
-      delay(pinDelay);
+      delayMicroseconds(pinDelay);
       // scan row by row with LOW to get all pressed keys in a column
       for (int j = 0; j < buttonRowsCount; j++) {
         digitalWrite(buttonRows[j], LOW);
-        delay(pinDelay);
+        delayMicroseconds(pinDelay);
         keys[i][j][0] = digitalRead(buttonColumns[i]) == LOW ? true : false;
         
         // register if any key is pressed at all
         if( ! anyKeyPressed and keys[i][j][0]) anyKeyPressed = true;
 
         digitalWrite(buttonRows[j], HIGH);
-        delay(pinDelay);
+        delayMicroseconds(pinDelay);
       }
       // reset rows to LOW after scan
       for (int j = 0; j < buttonRowsCount; j++) digitalWrite(buttonRows[j], LOW);
-      delay(pinDelay);
+      delayMicroseconds(pinDelay);
     } else {
       // if no key is pressed in a row, reset whole row
       for (int j = 0; j < buttonRowsCount; j++) keys[i][j][0] = false;
