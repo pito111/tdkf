@@ -1,20 +1,35 @@
 // LED pin (13 for Teensy 4.0 onboard LED)
 const byte led = 13;
 // base "off" brightness level of LED
-const byte ledBase = 20;
+const byte ledBase = 0;
 // "on" brightness level of LED
 const byte ledOn = 100;
 // delay after pin level change in microsecconds
 const int pinDelay = 10;
 
 // keyboard row list
-const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 17 };
+const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 17, 16 };
 // keyboard column list
 const byte buttonRows[] = { 21, 22, 23, 16, 19 };
 // number of columns
 const byte buttonColumnsCount = sizeof(buttonColumns) / sizeof(byte);
 // number of rows
 const byte buttonRowsCount = sizeof(buttonRows) / sizeof(byte);
+
+// declare array for registering key statuses
+boolean keys[buttonColumnsCount][buttonRowsCount][2];
+// keyboard map. Be carefull with correct number of rows and columns.
+// transposed for better readability
+int keymap[buttonRowsCount][buttonColumnsCount] = {
+  { MODIFIERKEY_SHIFT, MODIFIERKEY_CTRL, MODIFIERKEY_ALT, MODIFIERKEY_GUI, KEY_T, KEY_Y, KEY_U, KEY_I, KEY_O, KEY_P, KEY_LEFT_BRACE, KEY_RIGHT_BRACE, 0, 0, 0},
+  { MODIFIERKEY_RIGHT_SHIFT, MODIFIERKEY_RIGHT_CTRL, MODIFIERKEY_RIGHT_ALT, MODIFIERKEY_RIGHT_GUI, KEY_G, KEY_H, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON, KEY_QUOTE, KEY_BACKSLASH, 0, 0, 0},
+  { MODIFIERKEY_SHIFT, MODIFIERKEY_CTRL, MODIFIERKEY_ALT, MODIFIERKEY_GUI, KEY_V, KEY_B, KEY_N, KEY_M, KEY_COMMA, KEY_PERIOD, KEY_SLASH, KEY_SPACE, 0, 0},
+  { MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL },
+  { KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER }
+};
+
+// variable to register if any key is pressed
+boolean anyKeyPressed;
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -33,21 +48,6 @@ void setup() {
     digitalWrite(buttonRows[i], LOW);
   }
 }
-
-// declare array for registering key statuses
-boolean keys[buttonColumnsCount][buttonRowsCount][2];
-// keyboard map. Be carefull with correct number of rows and columns.
-// transposed for better readability
-int keymap[buttonRowsCount][buttonColumnsCount] = {
-  { KEY_Q, KEY_W, KEY_E, KEY_R, KEY_T, KEY_Y, KEY_U, KEY_I, KEY_O, KEY_P, KEY_LEFT_BRACE, KEY_RIGHT_BRACE, 0, 0},
-  { KEY_A, KEY_S, KEY_D, KEY_F, KEY_G, KEY_H, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON, KEY_QUOTE, KEY_BACKSLASH, 0, 0},
-  { MODIFIERKEY_SHIFT, KEY_Z, KEY_X, KEY_C, KEY_V, KEY_B, KEY_N, KEY_M, KEY_COMMA, KEY_PERIOD, KEY_SLASH, KEY_SPACE, 0, 0},
-  { MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL, MODIFIERKEY_CTRL },
-  { KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER, KEY_ENTER }
-};
-
-// variable to register if any key is pressed
-boolean anyKeyPressed;
 
 // the loop routine runs over and over again forever:
 void loop() {

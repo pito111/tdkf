@@ -1,11 +1,13 @@
+#include "usb_keyboard_NKRO.h"
+
 // LED pin (13 for Teensy 4.0 onboard LED)
 const byte led = 13;
 // base "off" brightness level of LED
 const byte ledBase = 20;
 // "on" brightness level of LED
 const byte ledOn = 100;
-// delay in microseconds after pin level change (1 works for Teensy 4.0)
-const int pinDelay = 1;
+// delay in microseconds after pin level change
+const int pinDelay = 10;
 
 // keyboard row list
 const byte buttonColumns[] = { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 14, 17 };
